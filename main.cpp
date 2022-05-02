@@ -1,3 +1,4 @@
+#include "treemodel.h"
 #include <QFile>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -5,8 +6,16 @@
 int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
 
+  QFile file(":/QML_TreeView_Example/default.txt");
+  file.open(QIODevice::ReadOnly);
+  TreeModel model(file.readAll());
+  file.close();
 
   QQmlApplicationEngine engine;
+
+  QVariant modelValue;
+  modelValue.setValue(&model);
+  engine.setInitialProperties({{"treeModel", modelValue}});
 
   const QUrl url(u"qrc:/QML_TreeView_Example/main.qml"_qs);
   QObject::connect(
