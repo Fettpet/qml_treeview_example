@@ -15,6 +15,13 @@ qt_add_qml_module(appQML_TreeView_Example
     URI QML_TreeView_Example
     VERSION 1.0
     QML_FILES main.qml 
+    SOURCES
+       treeitem.h
+       treeitem.cpp
+       treemodel.h
+       treemodel.cpp
+    RESOURCES
+       default.txt
 )
 
 set_target_properties(appQML_TreeView_Example PROPERTIES
