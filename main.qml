@@ -24,6 +24,7 @@ Window {
 
             readonly property real indent: 20
             readonly property real padding: 5
+
             // Assigned to by TreeView:
             required property TreeView treeView
             required property bool isTreeNode
@@ -32,6 +33,18 @@ Window {
             required property int depth
 
             required property int row
+            TapHandler {
+                onTapped: treeView.toggleExpanded(row)
+            }
+
+            Text {
+                id: indicator
+                visible: root.isTreeNode && root.hasChildren
+                x: padding + (root.depth * root.indent)
+                anchors.verticalCenter: label.verticalCenter
+                text: "▸"
+                rotation: root.expanded ? 90 : 0
+            }
 
             Text {
                 id: label
